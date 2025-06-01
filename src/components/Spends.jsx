@@ -11,7 +11,7 @@ const Spends = () => {
                 <p className="text-lg font-semibold">Total</p>
                 <span className="text-xl font-bold">$2985.00</span>
               </div>
-              <div class="h-px bg-gray-400 my-2"></div>
+              <div className="h-px bg-gray-400 my-2"></div>
             </div>
         </div>
     </>
