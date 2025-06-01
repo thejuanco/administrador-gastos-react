@@ -1,8 +1,14 @@
-import React from 'react'
-
 const DistributionExpen = () => {
   return (
-    <div>DistributionExpen</div>
+    <>
+        <div className="p-4 border border-gray-300 rounded-lg">
+            <h1 className="font-semibold text-xl">Distribución de Gastos</h1>
+
+            <div className="mt-6">
+                
+            </div>
+        </div>
+    </>
   )
 }
 
