@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [budget, setBudget ] = useState(null)
+  const [budget, setBudget] = useState(null);
   const [spends, setSpends] = useState([]);
   const baseURL = "http://localhost:3000";
 
@@ -27,13 +27,25 @@ export const AppProvider = ({ children }) => {
   };
 
   const createBudget = async (data) => {
-    console.log(data)
-  }
+    try {
+      const response = await fetch(`${baseURL}/api/createBudget`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getSpend = () => {
     fetch(`${baseURL}/api/getSpend`)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => setBudget(data));
   };
 
   return (
