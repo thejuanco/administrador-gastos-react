@@ -3,29 +3,28 @@ import { createContext, useContext, useState, useEffect } from "react";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [budget, setBudget] = useState(null);
+  const [budget, setBudget] = useState({});
   const [spends, setSpends] = useState([]);
   const baseURL = "http://localhost:3000";
 
   useEffect(() => {
     fetch(`${baseURL}/api/getSpend`)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data)
+        setSpends(data)
+    });
   }, []);
 
   useEffect(() => {
     fetch(`${baseURL}/api/getBudget`)
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        setBudget(data)
+    });
   }, []);
 
   //Obtener los datos del presupuesto
-  const getBudget = async () => {
-    fetch(`${baseURL}/api/getBudget`)
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
-
   const createBudget = async (data) => {
     try {
       const response = await fetch(`${baseURL}/api/createBudget`, {
@@ -45,11 +44,11 @@ export const AppProvider = ({ children }) => {
   const getSpend = () => {
     fetch(`${baseURL}/api/getSpend`)
       .then((res) => res.json())
-      .then((data) => setBudget(data));
+      .then((data) => setSpends(data));
   };
 
   return (
-    <AppContext.Provider value={{ getBudget, createBudget, getSpend }}>
+    <AppContext.Provider value={{ createBudget, getSpend, setBudget, budget, spends }}>
       {children}
     </AppContext.Provider>
   );
