@@ -2,7 +2,7 @@ import React from 'react'
 import Budget from '../components/Budget'
 import Spends from '../components/Spends'
 import DistributionExpen from '../components/DistributionExpen'
-import FindSpend from '../components/FindSpend'
+import SpendingHistory from '../components/SpendingHistory'
 
 const Home = () => {
     const click = () => {
@@ -27,7 +27,7 @@ const Home = () => {
                 <Spends/>
             </div>
             <div className='mx-4'>
-                <FindSpend/>
+                <SpendingHistory/>
             </div>
         </div>
     </>
