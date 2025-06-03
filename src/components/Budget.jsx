@@ -10,12 +10,14 @@ const Budget = () => {
     formState: { errors },
   } = useForm();
 
-  const { createBudget, budget } = useAppContext();
+  const { createBudget, budget, spends } = useAppContext();
   console.log(budget);
 
   const onSubmit = (data) => {
     createBudget(data);
   };
+
+  const spendsLength = spends.length
 
   return (
     <>
@@ -37,8 +39,13 @@ const Budget = () => {
                             <h2 className="text-center text-xl font-bold text-green-700">$ {budget.budget_total}</h2>
                         </div>
                     </div>
-                    <div>
+                    <div className="flex justify-between">
                         <p className="text-gray-500">Total de gastos: </p>
+                        <p className="text-gray-900 font-semibold">{spendsLength}</p>
+                    </div>
+                    <div className="flex justify-between">
+                        <p className="text-gray-500">Promedio por gasto: </p>
+                        <p className="text-gray-900 font-semibold">{spendsLength}</p>
                     </div>
                     <button className="mt-2 text-center border border-gray-300 py-2 w-full rounded-md hover:bg-gray-200">Eliminar Presupuesto</button>
                 </div>
