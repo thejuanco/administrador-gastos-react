@@ -6,12 +6,10 @@ const Budget = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
   const { createBudget, budget, spends } = useAppContext();
-  console.log(budget);
 
   const onSubmit = (data) => {
     createBudget(data);

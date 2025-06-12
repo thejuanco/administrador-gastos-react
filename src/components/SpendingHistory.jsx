@@ -2,7 +2,7 @@ import { useAppContext } from "../context/AppContext"
 
 const SpendingHistory = () => {
     const {spends} = useAppContext()
-    console.log(spends.length)
+    // console.log(spends.length)
 
   return (
     <>
