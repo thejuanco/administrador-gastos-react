@@ -6,8 +6,11 @@ import {
 } from "@headlessui/react";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
+import { useAppContext } from "../context/AppContext"
 
 const ModalSpend = ({ isOpen, setIsOpen }) => {
+  const {createSpend, budget} = useAppContext()
+
   const {
     register,
     handleSubmit,
@@ -15,7 +18,15 @@ const ModalSpend = ({ isOpen, setIsOpen }) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    try {
+      //Agregando al objeto el id del presupuesto
+      const budget_Id = budget[0].id
+      data = Object.assign({budget_Id}, data)
+      //Guardar los datos
+      createSpend(data)
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
@@ -60,18 +71,18 @@ const ModalSpend = ({ isOpen, setIsOpen }) => {
                   <label>Nombre del gasto</label>
                   <input
                     type="text"
-                    id="name"
+                    id="description"
                     className="w-full p-2 rounded-lg border border-gray-200"
                     placeholder="Comida"
-                    {...register("name")}
+                    {...register("description")}
                   />
                   <label>Monto del gastos</label>
                   <input
                     type="number"
-                    id="description"
+                    id="amount"
                     className="w-full p-2 rounded-lg border border-gray-200"
                     placeholder="Ej. 1000"
-                    {...register("description")}
+                    {...register("amount")}
                   />
                 </form>
                 <div className="flex justify-end gap-2 mt-6">

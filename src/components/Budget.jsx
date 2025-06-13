@@ -10,9 +10,10 @@ const Budget = () => {
   } = useForm();
 
   const { createBudget, budget, spends } = useAppContext();
+  const [idBudget, setIdBudget] = useState(null)
 
   const onSubmit = (data) => {
-    createBudget(data);
+    console.log(data);
   };
 
   const spendsLength = spends.length
