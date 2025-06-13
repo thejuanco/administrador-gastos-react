@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../context/AppContext";
+import DeleteBudgetModal from "./DeleteBudgetModal";
 
 const Budget = () => {
   const {
@@ -11,6 +12,10 @@ const Budget = () => {
 
   const { createBudget, budget, spends } = useAppContext();
   const [idBudget, setIdBudget] = useState(null)
+  const [isOpen, setIsOpen] = useState(false)
+
+  const openModal = () => setIsOpen(true)
+  const closeModal = () => setIsOpen(false)
 
   const onSubmit = (data) => {
     console.log(data);
@@ -46,7 +51,11 @@ const Budget = () => {
                         <p className="text-gray-500">Promedio por gasto: </p>
                         <p className="text-gray-900 font-semibold">{spendsLength}</p>
                     </div>
-                    <button className="mt-2 text-center border border-gray-300 py-2 w-full rounded-md hover:bg-gray-200">Eliminar Presupuesto</button>
+                    <button 
+                      className="mt-2 text-center border border-gray-300 py-2 w-full rounded-md hover:bg-gray-200"
+                      onClick={openModal}
+                    >Eliminar Presupuesto</button>
+                    <DeleteBudgetModal visible={openModal} onClose={closeModal} isOpen={isOpen} setIsOpen={setIsOpen}/>
                 </div>
             ))}
           </div>
