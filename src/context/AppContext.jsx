@@ -11,7 +11,6 @@ export const AppProvider = ({ children }) => {
     fetch(`${baseURL}/api/getSpend`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setSpends(data)
     });
   }, []);
@@ -41,6 +40,28 @@ export const AppProvider = ({ children }) => {
     }
   };
 
+  const getBudget = async () => {
+    fetch(`${baseURL}/api/getBudget`)
+      .then((res) => res.json())
+      .then((data) => setBudget(data));
+  }
+
+  const createSpend = async (data) => {
+    try {
+      const response = await fetch(`${baseURL}/api/createSpend`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+
+      return await response.json()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const getSpend = () => {
     fetch(`${baseURL}/api/getSpend`)
       .then((res) => res.json())
@@ -48,7 +69,7 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ createBudget, getSpend, setBudget, budget, spends }}>
+    <AppContext.Provider value={{ createBudget, getSpend, setBudget, budget, spends, createSpend }}>
       {children}
     </AppContext.Provider>
   );
