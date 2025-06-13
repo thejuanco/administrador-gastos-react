@@ -4,6 +4,17 @@ const SpendingHistory = () => {
     const {spends} = useAppContext()
     // console.log(spends.length)
 
+    //Formatear fechas
+    function formattedData(date) {
+      const newDate = new Date(date);
+
+      return newDate.toLocaleDateString("es-ES", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+    }
+
   return (
     <>
       <div className="border border-gray-300 rounded-md h-96 mt-4 p-4">
@@ -22,7 +33,7 @@ const SpendingHistory = () => {
                     <div key={index} className="py-2 mx-2">
                         <h2 className="font-semibold">{spend.description}</h2>
                         <div className="flex justify-between">
-                            <p className="text-gray-400 text-sm">{spend.createdAt}</p>
+                            <p className="text-gray-400 text-sm">{formattedData(spend.createdAt)}</p>
                             <p className="font-semibold text-gray-700 text-lg">$ {spend.amount}</p>
                         </div>
                     </div>
