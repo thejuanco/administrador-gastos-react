@@ -2,7 +2,8 @@ import {
   Dialog,
   DialogPanel,
   DialogTitle,
-  Transition,
+  TransitionChild,
+  Transition
 } from "@headlessui/react";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
@@ -36,7 +37,7 @@ const ModalSpend = ({ isOpen, setIsOpen }) => {
         className="relative z-50"
         onClose={() => setIsOpen(false)}
       >
-        <Transition.Child
+        <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
           enterFrom="opacity-0"
@@ -46,10 +47,10 @@ const ModalSpend = ({ isOpen, setIsOpen }) => {
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
-        </Transition.Child>
+        </TransitionChild>
 
         <div className="fixed inset-0 flex items-center justify-center p-4">
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0 scale-95"
@@ -103,7 +104,7 @@ const ModalSpend = ({ isOpen, setIsOpen }) => {
                 </div>
               </div>
             </DialogPanel>
-          </Transition.Child>
+          </TransitionChild>
         </div>
       </Dialog>
     </Transition>

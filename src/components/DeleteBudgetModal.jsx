@@ -3,6 +3,7 @@ import {
   DialogPanel,
   DialogTitle,
   Transition,
+  TransitionChild,
   Description,
 } from "@headlessui/react";
 import { Fragment } from "react";
@@ -16,7 +17,7 @@ const DeleteBudgetModal = ({ isOpen, setIsOpen }) => {
           className="relative z-50"
           onClose={() => setIsOpen(false)}
         >
-          <Transition.Child
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -26,10 +27,10 @@ const DeleteBudgetModal = ({ isOpen, setIsOpen }) => {
             leaveTo="opacity-0"
           >
             <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" />
-          </Transition.Child>
+          </TransitionChild>
 
           <div className="fixed inset-0 flex items-center justify-center p-4">
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
@@ -61,7 +62,7 @@ const DeleteBudgetModal = ({ isOpen, setIsOpen }) => {
                   </button>
                 </div>
               </DialogPanel>
-            </Transition.Child>
+            </TransitionChild>
           </div>
         </Dialog>
       </Transition>
