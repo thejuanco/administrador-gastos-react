@@ -20,14 +20,13 @@ const Budget = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
-
-  const spendsLength = spends.length
-
+  
   const averageSpends = spends.reduce((accumulator, currentValue) => {
     const totalSpends = currentValue.amount
     return accumulator + totalSpends
   }, 0)
-
+  
+  const spendsLength = spends.length
   const resultAverage = averageSpends / spendsLength
 
   return (
@@ -54,7 +53,7 @@ const Budget = () => {
                         </div>
                         <div className="bg-green-100 p-1 m-2 rounded-lg">
                             <h1 className="text-center font-semibold text-green-600">Disponible</h1>
-                            <h2 className="text-center text-xl font-bold text-green-700">$ {budget.budget_total}</h2>
+                            <h2 className="text-center text-xl font-bold text-green-700">$ {budget.budget_total - averageSpends}</h2>
                         </div>
                     </div>
                     <div className="flex justify-between">
