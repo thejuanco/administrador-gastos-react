@@ -17,7 +17,7 @@ const SpendingHistory = () => {
 
   return (
     <>
-      <div className="border border-gray-300 rounded-md h-96 mt-4 p-4">
+      <div className="border border-gray-300 rounded-md h-min mt-4 p-4">
         <h1 className="font-semibold text-xl">Historial de Gastos</h1>
         <form>
             <input
