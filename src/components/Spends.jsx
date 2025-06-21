@@ -3,7 +3,6 @@ import { useAppContext } from '../context/AppContext'
 
 const Spends = () => {
   const {spends, setSpends} = useAppContext()
-  console.log(spends)
 
   const result = spends.reduce((accumulator, currentValue) =>{
     const totalSpends = currentValue.amount

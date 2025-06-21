@@ -23,6 +23,13 @@ const Budget = () => {
 
   const spendsLength = spends.length
 
+  const averageSpends = spends.reduce((accumulator, currentValue) => {
+    const totalSpends = currentValue.amount
+    return accumulator + totalSpends
+  }, 0)
+
+  const resultAverage = averageSpends / spendsLength
+
   return (
     <>
       <div className="p-4 border border-gray-300 rounded-lg">
@@ -56,7 +63,7 @@ const Budget = () => {
                     </div>
                     <div className="flex justify-between">
                         <p className="text-gray-500">Promedio por gasto: </p>
-                        <p className="text-gray-900 font-semibold">{spendsLength}</p>
+                        <p className="text-gray-900 font-semibold">$ {resultAverage}</p>
                     </div>
                     <button 
                       className="flex items-center justify-center mt-2 text-center border border-gray-300 py-2 w-full rounded-md hover:bg-gray-200"
