@@ -62,7 +62,7 @@ const Budget = () => {
                     </div>
                     <div className="flex justify-between">
                         <p className="text-gray-500">Promedio por gasto: </p>
-                        <p className="text-gray-900 font-semibold">$ {resultAverage}</p>
+                        <p className="text-gray-900 font-semibold">$ {resultAverage.toFixed(2)}</p>
                     </div>
                     <button 
                       className="flex items-center justify-center mt-2 text-center border border-gray-300 py-2 w-full rounded-md hover:bg-gray-200"
