@@ -34,11 +34,28 @@ export const AppProvider = ({ children }) => {
         },
       });
 
-      return await response.json();
+      await response.json();
+      // setBudget(prevBudget => [...prevBudget, data])
     } catch (error) {
       console.log(error);
     }
   };
+
+  const deleteBudget = async (id) => {
+    try {
+      const response = await fetch(`${baseURL}/api/deleteBudget/${id}`, {
+        //Cuando es eliminar no lleva body ya que no se envia nada al servidor
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      await response.json();
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const getBudget = async () => {
     fetch(`${baseURL}/api/getBudget`)
@@ -62,14 +79,10 @@ export const AppProvider = ({ children }) => {
     }
   }
 
-  const getSpend = () => {
-    fetch(`${baseURL}/api/getSpend`)
-      .then((res) => res.json())
-      .then((data) => setSpends(data));
-  };
+  
 
   return (
-    <AppContext.Provider value={{ createBudget, getSpend, setBudget, budget, spends, createSpend }}>
+    <AppContext.Provider value={{ createBudget, setBudget, budget, deleteBudget, spends, createSpend }}>
       {children}
     </AppContext.Provider>
   );
