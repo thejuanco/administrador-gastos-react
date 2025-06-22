@@ -7,8 +7,13 @@ import {
   Description,
 } from "@headlessui/react";
 import { Fragment } from "react";
+import { useAppContext } from "../context/AppContext";
 
-const DeleteBudgetModal = ({ isOpen, setIsOpen }) => {
+const DeleteBudgetModal = ({ isOpen, setIsOpen, budget }) => {
+  //Obtener el endpoint del context 
+  const { deleteBudget } = useAppContext()
+  const { id } = budget
+
   return (
     <>
       <Transition show={isOpen} as={Fragment}>
@@ -56,7 +61,10 @@ const DeleteBudgetModal = ({ isOpen, setIsOpen }) => {
                   </button>
                   <button
                     className="px-5 py-2 bg-gray-900 text-white rounded-full hover:bg-gray-800"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      deleteBudget(id)
+                      setIsOpen(false)
+                    }}
                   >
                     Eliminar
                   </button>
