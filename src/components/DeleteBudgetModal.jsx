@@ -64,6 +64,8 @@ const DeleteBudgetModal = ({ isOpen, setIsOpen, budget }) => {
                     onClick={() => {
                       deleteBudget(id)
                       setIsOpen(false)
+                      //Recargar la pantalla una vez eliminado el presupuesto
+                      window.location.reload(false)
                     }}
                   >
                     Eliminar

@@ -11,14 +11,18 @@ const Budget = () => {
   } = useForm();
 
   const { createBudget, budget, spends } = useAppContext();
-  const [idBudget, setIdBudget] = useState(null)
   const [isOpen, setIsOpen] = useState(false)
 
   const openModal = () => setIsOpen(true)
   const closeModal = () => setIsOpen(false)
 
   const onSubmit = (data) => {
-    console.log(data);
+    try{
+      createBudget(data)
+      window.location.reload(false)
+    }catch(error){
+      console.log(error)
+    }
   };
   
   const averageSpends = spends.reduce((accumulator, currentValue) => {
@@ -73,18 +77,18 @@ const Budget = () => {
                       </svg>
                       Eliminar Presupuesto
                     </button>
-                    <DeleteBudgetModal visible={openModal} onClose={closeModal} isOpen={isOpen} setIsOpen={setIsOpen}/>
+                    <DeleteBudgetModal visible={openModal} onClose={closeModal} isOpen={isOpen} setIsOpen={setIsOpen} budget={budget}/>
                 </div>
             ))}
           </div>
         ) : (
-          <div className="mt-6">
+          <div>
             <h1 className="font-semibold text-xl">Presupuesto General</h1>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col space-y-3"
             >
-              <label className="font-semibold">Establece tu presupuesto</label>
+              <label className="font-semibold text-gray-600">Establece tu presupuesto</label>
               <input
                 id="budget_total"
                 name="budget_total"
