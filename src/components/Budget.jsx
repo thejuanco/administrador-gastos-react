@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../context/AppContext";
 import DeleteBudgetModal from "./DeleteBudgetModal";
@@ -12,11 +12,10 @@ const Budget = () => {
 
   const { createBudget, budget, spends } = useAppContext();
   const [isOpen, setIsOpen] = useState(false)
-
   const openModal = () => setIsOpen(true)
   const closeModal = () => setIsOpen(false)
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     try{
       createBudget(data)
       window.location.reload(false)
@@ -24,14 +23,23 @@ const Budget = () => {
       console.log(error)
     }
   };
+
+  //Obtiene el id del presupuesto
+  const idBudget = budget[0]?.id
   
+  //Filtra los gastos que coinciden con el presupuesto
+  const filteredSpends = spends.filter(item => item.budget_Id === idBudget)
+  //Suma el total de los gastos filtrados
+  const totalSpends = filteredSpends.reduce((acc, curr) => acc + curr.amount, 0)
+  const available = budget[0]?.budget_total - totalSpends;
+
   const averageSpends = spends.reduce((accumulator, currentValue) => {
     const totalSpends = currentValue.amount
     return accumulator + totalSpends
   }, 0)
   
-  const spendsLength = spends.length
-  const resultAverage = averageSpends / spendsLength
+  const spendsLength = filteredSpends.length > 0 ? spends.length : 'Sin gastos aún';
+  const resultAverage = filteredSpends.length > 0 ? totalSpends / filteredSpends.length : 0;
 
   return (
     <>
@@ -57,7 +65,7 @@ const Budget = () => {
                         </div>
                         <div className="bg-green-100 p-1 m-2 rounded-lg">
                             <h1 className="text-center font-semibold text-green-600">Disponible</h1>
-                            <h2 className="text-center text-xl font-bold text-green-700">$ {budget.budget_total - averageSpends}</h2>
+                            <h2 className="text-center text-xl font-bold text-green-700">$ {available}</h2>
                         </div>
                     </div>
                     <div className="flex justify-between">
