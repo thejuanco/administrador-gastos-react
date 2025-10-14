@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppContext } from "../context/AppContext";
 import DeleteBudgetModal from "./DeleteBudgetModal";
+import Messages from "./Messages";
 
 const Budget = () => {
   const {
@@ -138,6 +139,7 @@ const Budget = () => {
                   {errors.presupuesto.message}
                 </p>
               )}
+              {/* <Messages/> */}
               <button className="bg-gray-900 text-gray-200 rounded-lg py-2 hover:bg-gray-800">
                 Establecer Presupuesto
               </button>
