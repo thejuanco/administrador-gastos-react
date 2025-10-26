@@ -1,9 +1,14 @@
-const connectAPI = async () => {
-  const baseURL = "http://localhost:3000";
-  fetch(baseURL)
-    .then((response) => response.json())
-    .then((data) => console.log(data));
-
-};
-
-export { connectAPI };
+export const apiFetch = async (url, options = {}) => {
+  try {
+    const response = await fetch(`${baseURL}${url}`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      ...options
+    })    
+    return await response.json()
+  } catch (error) {
+    console.log(`Api error: ${error}`)
+    throw error
+  }
+}
